@@ -1,0 +1,30 @@
+{
+  "name": "elm-tutorial",
+  "version": "0.0.1",
+  "description": "",
+  "main": "api.js",
+  "scripts": {
+    "api": "node api.js",
+    "build": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack -w",
+    "dev": "./node_modules/.bin/webpack-dev-server --port 3000"
+  },
+  "author": "Labi Kyo <labikyo@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ace-css": "^1.1.0",
+    "css-loader": "^0.23.1",
+    "elm-webpack-loader": "^3.0.3",
+    "file-loader": "^0.9.0",
+    "font-awesome": "^4.6.3",
+    "json-server": "^0.8.17",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "devDependencies": {
+    "concurrently": "^2.2.0"
+  }
+}
