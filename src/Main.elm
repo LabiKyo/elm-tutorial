@@ -15,7 +15,7 @@ init result =
         currentRoute =
             Routing.routeFromResult result
     in
-        ( initialModel currentRoute, Cmd.map PlayerMsg fetchAll )
+        ( initialModel currentRoute, Cmd.map PlayersMsg fetchAll )
 
 
 

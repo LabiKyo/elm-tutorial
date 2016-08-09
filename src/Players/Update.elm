@@ -9,38 +9,28 @@ import Players.Models exposing (Player, PlayerId)
 update : Msg -> List Player -> ( List Player, Cmd Msg )
 update message players =
     case message of
+        -- model
         FetchAllDone newPlayers ->
             ( newPlayers, Cmd.none )
 
         FetchAllFail error ->
             ( players, Cmd.none )
 
-        ShowPlayers ->
-            ( players, Navigation.modifyUrl "#players" )
-
-        ShowPlayer id ->
-            ( players, Navigation.modifyUrl ("#players/" ++ (toString id)) )
-
-        ChangeLevel id howMuch ->
-            ( players, changeLevelCommands id howMuch players |> Cmd.batch )
-
-        SaveSuccess updatedPlayer ->
+        SaveDone updatedPlayer ->
             ( updatePlayer updatedPlayer players, Cmd.none )
 
         SaveFail error ->
             ( players, Cmd.none )
 
+        -- commands
+        ChangeLevel id howMuch ->
+            ( players, changeLevelCommands id howMuch players |> Cmd.batch )
 
-changeLevelCommands : PlayerId -> Int -> List Player -> List (Cmd Msg)
-changeLevelCommands playerId howMuch =
-    let
-        cmdForPlayer existingPlayer =
-            if existingPlayer.id == playerId then
-                save { existingPlayer | level = existingPlayer.level + howMuch }
-            else
-                Cmd.none
-    in
-        List.map cmdForPlayer
+        ShowPlayers ->
+            ( players, Navigation.modifyUrl "#players" )
+
+        ShowPlayer id ->
+            ( players, Navigation.modifyUrl ("#players/" ++ (toString id)) )
 
 
 updatePlayer : Player -> List Player -> List Player
@@ -53,3 +43,15 @@ updatePlayer updatedPlayer =
                 existingPlayer
     in
         List.map select
+
+
+changeLevelCommands : PlayerId -> Int -> List Player -> List (Cmd Msg)
+changeLevelCommands playerId howMuch =
+    let
+        cmdForPlayer existingPlayer =
+            if existingPlayer.id == playerId then
+                save { existingPlayer | level = existingPlayer.level + howMuch }
+            else
+                Cmd.none
+    in
+        List.map cmdForPlayer

@@ -4,4 +4,4 @@ import Players.Messages
 
 
 type Msg
-    = PlayerMsg Players.Messages.Msg
+    = PlayersMsg Players.Messages.Msg

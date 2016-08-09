@@ -56,12 +56,6 @@ saveTask player =
             |> Http.fromJson memberDecoder
 
 
-save : Player -> Cmd Msg
-save player =
-    saveTask player
-        |> Task.perform SaveFail SaveSuccess
-
-
 memberEncoded : Player -> Encode.Value
 memberEncoded player =
     let
@@ -73,3 +67,9 @@ memberEncoded player =
     in
         list
             |> Encode.object
+
+
+save : Player -> Cmd Msg
+save player =
+    saveTask player
+        |> Task.perform SaveFail SaveDone

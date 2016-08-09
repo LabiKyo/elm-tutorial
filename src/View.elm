@@ -21,7 +21,7 @@ page : Model -> Html Msg
 page model =
     case model.route of
         PlayersRoute ->
-            Html.App.map PlayerMsg (Players.List.view model.players)
+            Html.App.map PlayersMsg (Players.List.view model.players)
 
         PlayerRoute id ->
             playerEditPage model id
@@ -40,7 +40,7 @@ playerEditPage model playerId =
     in
         case maybePlayer of
             Just player ->
-                Html.App.map PlayerMsg (Players.Edit.view player)
+                Html.App.map PlayersMsg (Players.Edit.view player)
 
             Nothing ->
                 notFoundView
